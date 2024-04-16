@@ -20,21 +20,80 @@ clear all
 
 %% Plot total invasive ECG signal from r01
 signum = 1;
-[t,y] = extract_edf(signum,data_r01,info_r01,fs_r01); 
+[t_r01_1,ecg_r01_1] = extract_edf(signum,data_r01,info_r01,fs_r01); 
 
-qrs_t_r01 = seconds(anno_r01.Onset); 
-qrs_r01 = find_qrs(qrs_t_r01,t,y); 
+qrs_t_r01_1 = seconds(anno_r01.Onset); 
+qrs_r01_1 = find_qrs(qrs_t_r01_1,t_r01_1,ecg_r01_1); 
 
 figure(1)
-plot(t,y)
+plot(t_r01_1,ecg_r01_1)
 hold on 
-scatter(qrs_t_r01,qrs_r01)
+scatter(qrs_t_r01_1,qrs_r01_1)
+xlabel('time (s)'); 
+ylabel('ECG Amplitude (mv??)')
+title('Original Invasive ECG from r01')
 
-%%
 
-[t_out,data_out,t_qrs_out,qrs_out] = chunk_ecg(0.1,0.2,t,y,qrs_t_r01); 
-%[t1,y1,qrs] = chunk_ecg(0.1,0.2,t,y,qrs_t_r01);
-plot(t1,y1)
+%% Band pass filter the signal from r01 
+t1 = 11; 
+t2 = 15; 
+
+fl = 0.1;  
+fh = 30; 
+fs = fs_r01(signum); 
+N = 1024; 
+
+r01_1_filtered = bandpassfilter(ecg_r01_1,fl,fh,fs,N); 
+
+[chunck_t_r01_1,chunk_r01_1_filtered,t_qrs_r01_1,qrs_r01_1] = chunk_ecg(t1,t2,t_r01_1,r01_1_filtered,qrs_t_r01_1); 
+
+% Collect data from materal ECG 1 
+signum = 2;
+[t_r01_2,ecg_r01_2] = extract_edf(signum,data_r01,info_r01,fs_r01); 
+qrs_t_r01_2 = seconds(anno_r01.Onset); 
+% qrs_r01_2 = find_qrs(qrs_t_r01_2,t_r01_2,ecg_r01_2);
+r01_2_filtered = bandpassfilter(ecg_r01_2,fl,fh,fs,N); 
+[chunck_t_r01_2,chunk_r01_2_filtered,t_qrs_r01_2,qrs_r01_2] = chunk_ecg(t1,t2,t_r01_2,r01_2_filtered,qrs_t_r01_2); 
+
+signum = 3;
+[t_r01_3,ecg_r01_3] = extract_edf(signum,data_r01,info_r01,fs_r01); 
+qrs_t_r01_3 = seconds(anno_r01.Onset); 
+% qrs_r01_3 = find_qrs(qrs_t_r01_3,t_r01_3,ecg_r01_3);
+r01_3_filtered = bandpassfilter(ecg_r01_3,fl,fh,fs,N); 
+[chunck_t_r01_3,chunk_r01_3_filtered,t_qrs_r01_3,qrs_r01_3] = chunk_ecg(t1,t2,t_r01_3,r01_3_filtered,qrs_t_r01_3); 
+
+signum = 4;
+[t_r01_4,ecg_r01_4] = extract_edf(signum,data_r01,info_r01,fs_r01); 
+qrs_t_r01_4 = seconds(anno_r01.Onset); 
+% qrs_r01_4 = find_qrs(qrs_t_r01_4,t_r01_4,ecg_r01_4);
+r01_4_filtered = bandpassfilter(ecg_r01_4,fl,fh,fs,N); 
+[chunck_t_r01_4,chunk_r01_4_filtered,t_qrs_r01_4,qrs_r01_4] = chunk_ecg(t1,t2,t_r01_4,r01_4_filtered,qrs_t_r01_4); 
+
+signum = 5;
+[t_r01_5,ecg_r01_5] = extract_edf(signum,data_r01,info_r01,fs_r01); 
+qrs_t_r01_5 = seconds(anno_r01.Onset); 
+% qrs_r01_5 = find_qrs(qrs_t_r01_5,t_r01_5,ecg_r01_5);
+r01_5_filtered = bandpassfilter(ecg_r01_5,fl,fh,fs,N); 
+[chunck_t_r01_5,chunk_r01_5_filtered,t_qrs_r01_5,qrs_r01_5] = chunk_ecg(t1,t2,t_r01_5,r01_5_filtered,qrs_t_r01_5); 
+
+
+
+figure(2)
+subplot(2,1,1)
+plot(chunck_t_r01_1,chunk_r01_1_filtered,'LineWidth',1)
 hold on 
-scatter(t_qrs_out,qrs_out); 
+subplot(2,1,2)
+scatter(t_qrs_r01_1,qrs_r01_1); 
+hold on 
+plot(chunck_t_r01_2,chunk_r01_2_filtered)
+hold on 
+plot(chunck_t_r01_3,chunk_r01_3_filtered)
+hold on 
+plot(chunck_t_r01_4,chunk_r01_4_filtered)
+hold on 
+plot(chunck_t_r01_5,chunk_r01_5_filtered)
+xlabel('time (s)'); 
+ylabel('ECG Amplitude (mv??)')
+title('Band Pass filtered Invasive ECG from r01')
+%legend('Invasive ECG Signal','Fetal QRS Complex Annotation','Materal ECG 1','Materal ECG 2')
 
