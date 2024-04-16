@@ -24,16 +24,9 @@ signum = 1;
 [t,y] = extract_edf(signum,data_r01,info_r01,fs_r01); 
 
 qrs_t_r01 = seconds(anno_r01.Onset); 
+qrs_r01 = find_qrs(qrs_t_r01,t,y); 
 
-% [tf,loc] = ismember(t,qrs_t_r01);
-% tf = find(tf);
-% [~,idx] = unique(loc(tf), 'first');
-% c = tf(idx);
-
-[qrs] = find_qrs(qrs_t_r01,t,y)
-
-%%
-
+figure(1)
 plot(t,y)
 hold on 
-stem(qrs_r01,mark)
+scatter(qrs_t_r01,qrs_r01)
