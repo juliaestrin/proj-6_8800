@@ -80,7 +80,7 @@ r01_5_filtered = bandpassfilter(ecg_r01_5,fl,fh,fs,N);
 
 figure(2)
 subplot(2,1,1)
-plot(chunck_t_r01_1,chunk_r01_1_filtered,'LineWidth',1)
+plot(chunck_t_r01_1,chunk_r01_1_filtered,'LineWidth',1) % plotting the chunk of fetal ECG data
 hold on 
 subplot(2,1,2)
 scatter(t_qrs_r01_1,qrs_r01_1); 
