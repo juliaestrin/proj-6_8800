@@ -16,16 +16,15 @@ clear all
 % [data_r08,anno_r08,info_r08,fs_r08] = read_edf("data\r08.edf");
 % [data_r10,anno_r10,info_r10,fs_r10] = read_edf("data\r10.edf");
 
-
-%%
-j = 1; 
-
-
-
 %%
 
-recnum = 2;
+
+%% Plot total invasive ECG signal from r01
 signum = 1;
-[t,y] = plot_edfseg(recnum,signum,data_r01,info_r01,fs_r01);
+[t,y] = extract_edf(signum,data_r01,info_r01,fs_r01); 
+qrs_t_r01 = seconds(anno_r01.Onset); 
+
 
 plot(t,y)
+hold on 
+stem(qrs_r01,mark)
