@@ -35,10 +35,10 @@ title('Original Invasive ECG from r01')
 
 
 %% Band pass filter the signal from r01 
-t1 = 11; 
-t2 = 15; 
+t1 = 1; 
+t2 = 5; 
 
-fl = 0.1;  
+fl = 3;  
 fh = 30; 
 fs = fs_r01(signum); 
 N = 1024; 
@@ -79,21 +79,29 @@ r01_5_filtered = bandpassfilter(ecg_r01_5,fl,fh,fs,N);
 
 
 figure(2)
-subplot(2,1,1)
+tiledlayout(2,1,"TileSpacing","none"); 
+
+nexttile 
 plot(chunck_t_r01_1,chunk_r01_1_filtered,'LineWidth',1)
+title('ECG Signal from patient r01')
 hold on 
-subplot(2,1,2)
-scatter(t_qrs_r01_1,qrs_r01_1); 
+scatter(t_qrs_r01_1,qrs_r01_1,"filled","ColorVariable","red");
+legend('Invasive ECG Signal','Fetal QRS Complex Annotation')
+ylabel('ECG Amplitude')
+
+nexttile 
+ 
 hold on 
-plot(chunck_t_r01_2,chunk_r01_2_filtered)
+%plot(chunck_t_r01_2,chunk_r01_2_filtered,"LineWidth",1)
+plot(chunck_t_r01_3,chunk_r01_3_filtered,"LineWidth",1)
 hold on 
-plot(chunck_t_r01_3,chunk_r01_3_filtered)
+plot(chunck_t_r01_4,chunk_r01_4_filtered,"LineWidth",1)
 hold on 
-plot(chunck_t_r01_4,chunk_r01_4_filtered)
+plot(chunck_t_r01_5,chunk_r01_5_filtered,"LineWidth",1)
 hold on 
-plot(chunck_t_r01_5,chunk_r01_5_filtered)
+yzeros = zeros(length(t_qrs_r01_1),1); 
+scatter(t_qrs_r01_1,yzeros,"filled","ColorVariable","red");
 xlabel('time (s)'); 
-ylabel('ECG Amplitude (mv??)')
-title('Band Pass filtered Invasive ECG from r01')
-%legend('Invasive ECG Signal','Fetal QRS Complex Annotation','Materal ECG 1','Materal ECG 2')
+ylabel('ECG Amplitude')
+legend('Materal ECG 2','Materal ECG 3','Materal ECG 4','Fetal QRS Complex Annotation')
 
