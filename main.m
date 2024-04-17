@@ -79,6 +79,7 @@ r01_5_filtered = bandpassfilter(ecg_r01_5,fl,fh,fs,N);
 
 
 figure(2)
+<<<<<<< HEAD
 tiledlayout(2,1,"TileSpacing","none"); 
 
 nexttile 
@@ -104,4 +105,23 @@ scatter(t_qrs_r01_1,yzeros,"filled","ColorVariable","red");
 xlabel('time (s)'); 
 ylabel('ECG Amplitude')
 legend('Materal ECG 2','Materal ECG 3','Materal ECG 4','Fetal QRS Complex Annotation')
+
+subplot(2,1,1)
+plot(chunck_t_r01_1,chunk_r01_1_filtered,'LineWidth',1) % plotting the chunk of fetal ECG data
+hold on 
+subplot(2,1,2)
+scatter(t_qrs_r01_1,qrs_r01_1); 
+hold on 
+plot(chunck_t_r01_2,chunk_r01_2_filtered)
+hold on 
+plot(chunck_t_r01_3,chunk_r01_3_filtered)
+hold on 
+plot(chunck_t_r01_4,chunk_r01_4_filtered)
+hold on 
+plot(chunck_t_r01_5,chunk_r01_5_filtered)
+xlabel('time (s)'); 
+ylabel('ECG Amplitude (mv??)')
+title('Band Pass filtered Invasive ECG from r01')
+%legend('Invasive ECG Signal','Fetal QRS Complex Annotation','Materal ECG 1','Materal ECG 2')
+
 
