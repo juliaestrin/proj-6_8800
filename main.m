@@ -79,7 +79,6 @@ r01_5_filtered = bandpassfilter(ecg_r01_5,fl,fh,fs,N);
 
 
 figure(2)
-<<<<<<< HEAD
 tiledlayout(2,1,"TileSpacing","none"); 
 
 nexttile 

@@ -19,7 +19,7 @@ r01_2_filtered = bandpassfilter(ecg_r01_2,fl,fh,fs,N);
 
 r01_1_filtered = bandpassfilter(ecg_r01_2,fl,fh,fs,N); 
 
-% [chunck_t_r01_1,chunk_r01_1_filtered,t_qrs_r01_1,qrs_r01_1] = chunk_ecg(t1,t2,t_r01_1,r01_1_filtered,qrs_t_r01_1); 
+[chunck_t_r01_1,chunk_r01_1_filtered,t_qrs_r01_1,qrs_r01_1] = chunk_ecg(t1,t2,t_r01_1,r01_1_filtered,qrs_t_r01_1); 
 
 % Collect data from materal ECG 1 
 signum = 2;
