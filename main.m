@@ -34,8 +34,8 @@ title('Original Invasive ECG from r01')
 
 
 %% Filter and plot r01 data
-t1 = 1; 
-t2 = 5; 
+t1 = 0; 
+t2 = 4; 
 
 fl = 3;  
 fh = 30; 
@@ -46,6 +46,11 @@ r01_1_filtered = bandpassfilter(ecg_r01_1,t_r01_1,fl,fh,fs,N);
 
 [chunck_t_r01_1,chunk_r01_1_filtered,t_qrs_r01_1,qrs_r01_1] = chunk_ecg(t1,t2,t_r01_1,r01_1_filtered,qrs_t_r01_1); 
 
+figure()
+yzeros = zeros(length(t_qrs_r01_1),1); 
+scatter(t_qrs_r01_1,yzeros,"filled","ColorVariable","red");
+
+%%
 % Collect data from materal ECG 1 
 signum = 2;
 [t_r01_2,ecg_r01_2] = extract_edf(signum,data_r01,info_r01,fs_r01); 

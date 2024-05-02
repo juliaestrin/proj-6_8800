@@ -1,0 +1,7 @@
+function [bpm] = bpm_annotation(t_Rpeaks)
+    
+    N = length(t_Rpeaks); 
+    t = t_Rpeaks 
+
+
+end
