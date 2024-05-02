@@ -51,73 +51,71 @@ end
 t_start = 0; 
 t_end = 4; 
 
-N = floor(t_r01(height(ecg_r01_filt),1)/4); 
+N = floor(t_r01(height(ecg_r01_filt),1)/4);
+N_test = floor(N*0.8); 
 
-% k = 1; 
-% i = 1; 
-% [t_chunk,ecg_chunk] = chunk_ecg(t_start,t_end,t_r01(:,i),ecg_r01_filt(:,i),anno_01);
-
+%% Gather Training Data 
 for i = 1:5
-    for k=1:N
+    for k=1:N_test
         signum = i;
 
         [t_chunk_01,ecg_chunk_01,t_chunk_Rpeak_01,ecg_chunk_Rpeak_01] = chunk_ecg(t_start,t_end,t_r01(:,i),ecg_r01_filt(:,i),t_anno_01); 
         t_01 = strcat('t',num2str(signum),'_',num2str(k));
         ecg_01 = strcat('ecg',num2str(signum),'_',num2str(k));
-        r01.(t_01) = t_chunk_01;
-        r01.(ecg_01) = ecg_chunk_01; 
+        r01_train.(t_01) = t_chunk_01;
+        r01_train.(ecg_01) = ecg_chunk_01; 
 
 
         [t_chunk_04,ecg_chunk_04,t_chunk_Rpeak_04,ecg_chunk_Rpeak_04] = chunk_ecg(t_start,t_end,t_r04(:,i),ecg_r04_filt(:,i),t_anno_04); 
         t_04 = strcat('t',num2str(signum),'_',num2str(k));
         ecg_04 = strcat('ecg',num2str(signum),'_',num2str(k));
-        r04.(t_04) = t_chunk_04;
-        r04.(ecg_04) = ecg_chunk_04; 
+        r04_train.(t_04) = t_chunk_04;
+        r04_train.(ecg_04) = ecg_chunk_04; 
 
         [t_chunk_07,ecg_chunk_07,t_chunk_Rpeak_07,ecg_chunk_Rpeak_07] = chunk_ecg(t_start,t_end,t_r07(:,i),ecg_r07_filt(:,i),t_anno_07); 
         t_07 = strcat('t',num2str(signum),'_',num2str(k));
         ecg_07 = strcat('ecg',num2str(signum),'_',num2str(k));
-        r07.(t_07) = t_chunk_07;
-        r07.(ecg_07) = ecg_chunk_07; 
+        r07_train.(t_07) = t_chunk_07;
+        r07_train.(ecg_07) = ecg_chunk_07; 
 
         [t_chunk_08,ecg_chunk_08,t_chunk_Rpeak_08,ecg_chunk_Rpeak_08] = chunk_ecg(t_start,t_end,t_r08(:,i),ecg_r08_filt(:,i),t_anno_08); 
         t_08 = strcat('t',num2str(signum),'_',num2str(k));
         ecg_08 = strcat('ecg',num2str(signum),'_',num2str(k));
-        r08.(t_08) = t_chunk_08;
-        r08.(ecg_08) = ecg_chunk_08; 
+        r08_train.(t_08) = t_chunk_08;
+        r08_train.(ecg_08) = ecg_chunk_08; 
 
         [t_chunk_10,ecg_chunk_10,t_chunk_Rpeak_10,ecg_chunk_Rpeak_10] = chunk_ecg(t_start,t_end,t_r10(:,i),ecg_r10_filt(:,i),t_anno_10); 
         t_10 = strcat('t',num2str(signum),'_',num2str(k));
         ecg_10 = strcat('ecg',num2str(signum),'_',num2str(k));
-        r10.(t_10) = t_chunk_10;
-        r10.(ecg_10) = ecg_chunk_10; 
+        r10_train.(t_10) = t_chunk_10;
+        r10_train.(ecg_10) = ecg_chunk_10; 
        
         if signum == 1
   
             t_Rpeak_01 = strcat('t_Rpeak','_',num2str(k));
             Rpeak_01 = strcat('Rpeak','_',num2str(k));
-            r01.(t_Rpeak_01) = t_chunk_Rpeak_01; 
-            r01.(Rpeak_01) = ecg_chunk_Rpeak_01;
+            r01_train.(t_Rpeak_01) = t_chunk_Rpeak_01; 
+            r01_train.(Rpeak_01) = ecg_chunk_Rpeak_01;
 
             t_Rpeak_04 = strcat('t_Rpeak','_',num2str(k));
             Rpeak_04 = strcat('Rpeak','_',num2str(k));
-            r04.(t_Rpeak_04) = t_chunk_Rpeak_04; 
-            r04.(Rpeak_04) = ecg_chunk_Rpeak_04;
+            r04_train.(t_Rpeak_04) = t_chunk_Rpeak_04; 
+            r04_train.(Rpeak_04) = ecg_chunk_Rpeak_04;
             
             t_Rpeak_07 = strcat('t_Rpeak','_',num2str(k));
             Rpeak_07 = strcat('Rpeak','_',num2str(k));
-            r07.(t_Rpeak_07) = t_chunk_Rpeak_07; 
-            r07.(Rpeak_07) = ecg_chunk_Rpeak_07;
+            r07_train.(t_Rpeak_07) = t_chunk_Rpeak_07; 
+            r07_train.(Rpeak_07) = ecg_chunk_Rpeak_07;
 
             t_Rpeak_08 = strcat('t_Rpeak','_',num2str(k));
             Rpeak_08 = strcat('Rpeak','_',num2str(k));
-            r08.(t_Rpeak_08) = t_chunk_Rpeak_08; 
-            r08.(Rpeak_08) = ecg_chunk_Rpeak_08;
+            r08_train.(t_Rpeak_08) = t_chunk_Rpeak_08; 
+            r08_train.(Rpeak_08) = ecg_chunk_Rpeak_08;
 
             t_Rpeak_10 = strcat('t_Rpeak','_',num2str(k));
             Rpeak_10 = strcat('Rpeak','_',num2str(k));
-            r10.(t_Rpeak_10) = t_chunk_Rpeak_10; 
-            r10.(Rpeak_10) = ecg_chunk_Rpeak_10;
+            r10_train.(t_Rpeak_10) = t_chunk_Rpeak_10; 
+            r10_train.(Rpeak_10) = ecg_chunk_Rpeak_10;
 
          end 
         t_start = t_end; 
@@ -127,37 +125,112 @@ for i = 1:5
     t_end = 4;
 end
 
-%%
+%% Gather Testing Data 
+for i = 1:5
+    for k=N_test+1:N
+        signum = i;
 
-for k = 1:N
+        [t_chunk_01,ecg_chunk_01,t_chunk_Rpeak_01,ecg_chunk_Rpeak_01] = chunk_ecg(t_start,t_end,t_r01(:,i),ecg_r01_filt(:,i),t_anno_01); 
+        t_01 = strcat('t',num2str(signum),'_',num2str(k));
+        ecg_01 = strcat('ecg',num2str(signum),'_',num2str(k));
+        r01_test.(t_01) = t_chunk_01;
+        r01_test.(ecg_01) = ecg_chunk_01; 
+
+
+        [t_chunk_04,ecg_chunk_04,t_chunk_Rpeak_04,ecg_chunk_Rpeak_04] = chunk_ecg(t_start,t_end,t_r04(:,i),ecg_r04_filt(:,i),t_anno_04); 
+        t_04 = strcat('t',num2str(signum),'_',num2str(k));
+        ecg_04 = strcat('ecg',num2str(signum),'_',num2str(k));
+        r04_test.(t_04) = t_chunk_04;
+        r04_test.(ecg_04) = ecg_chunk_04; 
+
+        [t_chunk_07,ecg_chunk_07,t_chunk_Rpeak_07,ecg_chunk_Rpeak_07] = chunk_ecg(t_start,t_end,t_r07(:,i),ecg_r07_filt(:,i),t_anno_07); 
+        t_07 = strcat('t',num2str(signum),'_',num2str(k));
+        ecg_07 = strcat('ecg',num2str(signum),'_',num2str(k));
+        r07_test.(t_07) = t_chunk_07;
+        r07_test.(ecg_07) = ecg_chunk_07; 
+
+        [t_chunk_08,ecg_chunk_08,t_chunk_Rpeak_08,ecg_chunk_Rpeak_08] = chunk_ecg(t_start,t_end,t_r08(:,i),ecg_r08_filt(:,i),t_anno_08); 
+        t_08 = strcat('t',num2str(signum),'_',num2str(k));
+        ecg_08 = strcat('ecg',num2str(signum),'_',num2str(k));
+        r08_test.(t_08) = t_chunk_08;
+        r08_test.(ecg_08) = ecg_chunk_08; 
+
+        [t_chunk_10,ecg_chunk_10,t_chunk_Rpeak_10,ecg_chunk_Rpeak_10] = chunk_ecg(t_start,t_end,t_r10(:,i),ecg_r10_filt(:,i),t_anno_10); 
+        t_10 = strcat('t',num2str(signum),'_',num2str(k));
+        ecg_10 = strcat('ecg',num2str(signum),'_',num2str(k));
+        r10_test.(t_10) = t_chunk_10;
+        r10_test.(ecg_10) = ecg_chunk_10; 
+       
+        if signum == 1
+  
+            t_Rpeak_01 = strcat('t_Rpeak','_',num2str(k));
+            Rpeak_01 = strcat('Rpeak','_',num2str(k));
+            r01_test.(t_Rpeak_01) = t_chunk_Rpeak_01; 
+            r01_test.(Rpeak_01) = ecg_chunk_Rpeak_01;
+
+            t_Rpeak_04 = strcat('t_Rpeak','_',num2str(k));
+            Rpeak_04 = strcat('Rpeak','_',num2str(k));
+            r04_test.(t_Rpeak_04) = t_chunk_Rpeak_04; 
+            r04_test.(Rpeak_04) = ecg_chunk_Rpeak_04;
+            
+            t_Rpeak_07 = strcat('t_Rpeak','_',num2str(k));
+            Rpeak_07 = strcat('Rpeak','_',num2str(k));
+            r07_test.(t_Rpeak_07) = t_chunk_Rpeak_07; 
+            r07_test.(Rpeak_07) = ecg_chunk_Rpeak_07;
+
+            t_Rpeak_08 = strcat('t_Rpeak','_',num2str(k));
+            Rpeak_08 = strcat('Rpeak','_',num2str(k));
+            r08_test.(t_Rpeak_08) = t_chunk_Rpeak_08; 
+            r08_test.(Rpeak_08) = ecg_chunk_Rpeak_08;
+
+            t_Rpeak_10 = strcat('t_Rpeak','_',num2str(k));
+            Rpeak_10 = strcat('Rpeak','_',num2str(k));
+            r10_test.(t_Rpeak_10) = t_chunk_Rpeak_10; 
+            r10_test.(Rpeak_10) = ecg_chunk_Rpeak_10;
+
+         end 
+        t_start = t_end; 
+        t_end = t_end + 4;
+    end 
+    t_start = 0; 
+    t_end = 4;
+end
+
+for k = N_test+1:N
     
     var = strcat('t_Rpeak_',num2str(k));
     
-    beat_01 = aveBeat_annotation(r01.(var)); 
+    beat_01 = aveBeat_annotation(r01_test.(var)); 
     beat_name_01 = strcat('gold_',num2str(k));
-    r01.(beat_name_01) = beat_01;
+    r01_test.(beat_name_01) = beat_01;
 
-    beat_04 = aveBeat_annotation(r04.(var)); 
+    beat_04 = aveBeat_annotation(r04_test.(var)); 
     beat_name_04 = strcat('gold_',num2str(k));
-    r04.(beat_name_04) = beat_04;
+    r04_test.(beat_name_04) = beat_04;
 
-    beat_07 = aveBeat_annotation(r07.(var)); 
+    beat_07 = aveBeat_annotation(r07_test.(var)); 
     beat_name_07 = strcat('gold_',num2str(k));
-    r07.(beat_name_07) = beat_07;
+    r07_test.(beat_name_07) = beat_07;
 
-    beat_08 = aveBeat_annotation(r08.(var)); 
+    beat_08 = aveBeat_annotation(r08_test.(var)); 
     beat_name_08 = strcat('gold_',num2str(k));
-    r08.(beat_name_08) = beat_08;
+    r08_test.(beat_name_08) = beat_08;
 
-    beat_10 = aveBeat_annotation(r10.(var)); 
+    beat_10 = aveBeat_annotation(r10_test.(var)); 
     beat_name_10 = strcat('gold_',num2str(k));
-    r10.(beat_name_10) = beat_10;
+    r10_test.(beat_name_10) = beat_10;
         
 end 
 
 %% Save the chunked data 
-save("data_chunked\r01","r01"); 
-save("data_chunked\r04","r04");
-save("data_chunked\r07","r07");
-save("data_chunked\r08","r08");
-save("data_chunked\r10","r10");
+save("data_chunked\r01_train","r01_train"); 
+save("data_chunked\r04_train","r04_train");
+save("data_chunked\r07_train","r07_train");
+save("data_chunked\r08_train","r08_train");
+save("data_chunked\r10_train","r10_train");
+
+save("data_chunked\r01_test","r01_test"); 
+save("data_chunked\r04_test","r04_test");
+save("data_chunked\r07_test","r07_test");
+save("data_chunked\r08_test","r08_test");
+save("data_chunked\r10_test","r10_test");
