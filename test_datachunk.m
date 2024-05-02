@@ -155,3 +155,9 @@ for k = 1:N
         
 end 
 
+%% Save the chunked data 
+save("data_chunked\r01","r01"); 
+save("data_chunked\r04","r04");
+save("data_chunked\r07","r07");
+save("data_chunked\r08","r08");
+save("data_chunked\r10","r10");
