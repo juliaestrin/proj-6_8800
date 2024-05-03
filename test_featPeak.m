@@ -214,3 +214,5 @@ for k = N_train+1:N
     j = j + 1; 
 end 
 
+save("data_chunked\gold_vec_train","gold_vec_train"); 
+save("data_chunked\gold_vec_test","gold_vec_test");
