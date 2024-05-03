@@ -21,7 +21,8 @@ unmixed = transform(Mdl,X_whitened);
 
 kurt = kurtosis(unmixed);
 [~,idx] = sort(kurt, 'descend');
-unmixed_sorted = unmixed(idx,:);
+unmixed_sorted = unmixed(:,idx);
 
-IC1 = unmixed(:,1);
-IC2 = unmixed(:,2);
+IC1 = unmixed_sorted(:,1);
+IC2 = unmixed_sorted(:,2);
+% IC3 = unmixed_sorted(:,3);
