@@ -166,3 +166,51 @@ end
 
 save("data_chunked\feature_vec_train","feature_vec_train"); 
 save("data_chunked\feature_vec_test","feature_vec_test");
+
+%% Create column of gold standard for training
+j = 1; 
+for k = 1:N_train
+    gold_vec_train(j) = r01_train.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = 1:N_train
+    gold_vec_train(j) = r04_train.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = 1:N_train
+    gold_vec_train(j) = r07_train.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = 1:N_train
+    gold_vec_train(j) = r08_train.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = 1:N_train
+    gold_vec_train(j) = r10_train.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+
+
+%% Create column of gold standard for testing
+j = 1; 
+for k = N_train+1:N
+    gold_vec_test(j) = r01_test.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = N_train+1:N
+    gold_vec_test(j) = r04_test.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = N_train+1:N
+    gold_vec_test(j) = r07_test.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = N_train+1:N
+    gold_vec_test(j) = r08_test.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+for k = N_train+1:N
+    gold_vec_test(j) = r10_test.(strcat('gold_',num2str(k)));
+    j = j + 1; 
+end 
+

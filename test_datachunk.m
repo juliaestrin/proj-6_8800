@@ -125,6 +125,31 @@ for i = 1:5
     t_end = 4;
 end
 
+for k = 1:N_test
+    
+    var = strcat('t_Rpeak_',num2str(k));
+    
+    beat_01 = aveBeat_annotation(r01_train.(var)); 
+    beat_name_01 = strcat('gold_',num2str(k));
+    r01_train.(beat_name_01) = beat_01;
+
+    beat_04 = aveBeat_annotation(r04_train.(var)); 
+    beat_name_04 = strcat('gold_',num2str(k));
+    r04_train.(beat_name_04) = beat_04;
+
+    beat_07 = aveBeat_annotation(r07_train.(var)); 
+    beat_name_07 = strcat('gold_',num2str(k));
+    r07_train.(beat_name_07) = beat_07;
+
+    beat_08 = aveBeat_annotation(r08_train.(var)); 
+    beat_name_08 = strcat('gold_',num2str(k));
+    r08_train.(beat_name_08) = beat_08;
+
+    beat_10 = aveBeat_annotation(r10_train.(var)); 
+    beat_name_10 = strcat('gold_',num2str(k));
+    r10_train.(beat_name_10) = beat_10;
+        
+end 
 %% Gather Testing Data 
 for i = 1:5
     for k=N_test+1:N
