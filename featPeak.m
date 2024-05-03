@@ -59,15 +59,16 @@ normChunk = normal(chunk);
 invChunk = -normChunk;
 [Spks, locs_Swave] = findpeaks(invChunk,'MinPeakHeight',magTh,'MinPeakDistance',spcTh);
 
-figure()
-subplot(2,1,1)
-plot(chunk)
-subplot(2,1,2)
-plot(normChunk);
-hold on
-plot(locs_Swave,normChunk(locs_Swave),'rv','MarkerFaceColor','r');
-hold on
-plot(locs_Rwave,normChunk(locs_Rwave),'rs','MarkerFaceColor','b');
+% UNCOMMENT FIGURE TO SEE PEAKS
+% figure()
+% subplot(2,1,1)
+% plot(chunk)
+% subplot(2,1,2)
+% plot(normChunk);
+% hold on
+% plot(locs_Swave,normChunk(locs_Swave),'rv','MarkerFaceColor','r');
+% hold on
+% plot(locs_Rwave,normChunk(locs_Rwave),'rs','MarkerFaceColor','b');
 
 % magTh = 0.15;
 % spcTh = 150;
