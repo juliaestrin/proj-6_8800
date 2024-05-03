@@ -32,7 +32,7 @@ anno_10 = find_qrs(t_anno_10,t_r10(:,1),ecg_r10(:,1));
 %% Filter and demean all of the data 
 
 fl = 2;  
-fh = 30; 
+fh = 50; 
 fs = fs_r01(1); 
 N = 1024; 
 
