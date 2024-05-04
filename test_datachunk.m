@@ -163,10 +163,11 @@ end
 
 for k = 1:N*2
 
+    var = strcat('t_Rpeak_',num2str(k));
     beat_10 = aveBeat_annotation(r10_test.(var)); 
     beat_name_10 = strcat('gold_',num2str(k));
     r10_test.(beat_name_10) = beat_10;
-        
+
 end 
 
 %% Save the chunked data 
