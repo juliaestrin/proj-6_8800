@@ -48,7 +48,7 @@ end
 
 %% Chunk the ECG data and R peak annotation 
 
-t_chunk = 10; %Set chunk length for overlapping 
+t_chunk = 2; %Set chunk length for overlapping 
 
 t_start = 0; 
 t_end = t_chunk; 
