@@ -15,7 +15,7 @@ for k = 1:N_test
     c3 = r01_train_4s.(strcat('ecg4_',num2str(k)));
     c4 = r01_train_4s.(strcat('ecg5_',num2str(k)));
     
-   feature_vec_train_NonICA_4s_temp [m_num_peaks_c1,f_num_peaks_c1, m_avg_spacing_c1,f_avg_spacing_c1, m_avg_peak_mag_c1,f_avg_peak_mag_c1] = featPeakAbdo(c1,fs);
+    [m_num_peaks_c1,f_num_peaks_c1, m_avg_spacing_c1,f_avg_spacing_c1, m_avg_peak_mag_c1,f_avg_peak_mag_c1] = featPeakAbdo(c1,fs);
     [m_num_peaks_c2,f_num_peaks_c2, m_avg_spacing_c2,f_avg_spacing_c2, m_avg_peak_mag_c2,f_avg_peak_mag_c2] = featPeakAbdo(c2,fs);
     [m_num_peaks_c3,f_num_peaks_c3, m_avg_spacing_c3,f_avg_spacing_c3, m_avg_peak_mag_c3,f_avg_peak_mag_c3] = featPeakAbdo(c3,fs);
     [m_num_peaks_c4,f_num_peaks_c4, m_avg_spacing_c4,f_avg_spacing_c4, m_avg_peak_mag_c4,f_avg_peak_mag_c4] = featPeakAbdo(c4,fs);
