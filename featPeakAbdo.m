@@ -117,23 +117,6 @@ locs_F = locs_Rwave(to_keep);
 % hold on
 % plot(locs_Swave,normChunk(locs_Swave),'rv','MarkerFaceColor','r');
 
-figure()
-% subplot(3,1,1)
-% plot(normChunk)
-% hold on
-% plot(locs_Rwave,normChunk(locs_Rwave),'rs','MarkerFaceColor','b');
-% 
-% subplot(3,1,2)
-plot(normChunk);
-hold on
-% plot(locs_Swave,normChunk(locs_Swave),'rv','MarkerFaceColor','r');
-plot(locs_F,normChunk(locs_F),'rv','MarkerFaceColor','g')
-hold on
-plot(locs_RwaveM,normChunk(locs_RwaveM),'bs','MarkerFaceColor','r');
-title('Chunk 2, Channel 4')
-
-
-
 % subplot(3,1,3)
 % plot(normChunk);
 % hold on
