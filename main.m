@@ -38,7 +38,7 @@ t1 = 0;
 t2 = 4; 
 
 fl = 3;  
-fh = 30; 
+fh = 55; 
 fs = fs_r01(signum); 
 N = 1024; 
 
@@ -83,31 +83,58 @@ r01_5_filtered = bandpassfilter(ecg_r01_5,t_r01_5,fl,fh,fs,N);
 
 
 figure(2)
-tiledlayout(2,1,"TileSpacing","none"); 
+tiledlayout(5,1,"TileSpacing","none"); 
 
 nexttile 
 plot(chunck_t_r01_1,chunk_r01_1_filtered,'LineWidth',1)
-title('ECG Signal from patient r01')
+title('ECG Signal from patient r01','FontSize', 18)
 hold on 
 scatter(t_qrs_r01_1,qrs_r01_1,"filled","ColorVariable","red");
 legend('Invasive ECG Signal','Fetal QRS Complex Annotation')
-ylabel('ECG Amplitude')
+set(gca,'xtick',[])
+ylim([-55,55])
+yticks([-30 0 30])
+ylabel('uV')
+
 
 nexttile 
- 
 hold on 
-%plot(chunck_t_r01_2,chunk_r01_2_filtered,"LineWidth",1)
-plot(chunck_t_r01_3,chunk_r01_3_filtered,"LineWidth",1)
-hold on 
-plot(chunck_t_r01_4,chunk_r01_4_filtered,"LineWidth",1)
-hold on 
-plot(chunck_t_r01_5,chunk_r01_5_filtered,"LineWidth",1)
-hold on 
-yzeros = zeros(length(t_qrs_r01_1),1); 
-scatter(t_qrs_r01_1,yzeros,"filled","ColorVariable","red");
+plot(chunck_t_r01_2,chunk_r01_2_filtered,"LineWidth",1,"Color",'b')
+ylim([-60,55])
+set(gca,'xtick',[])
+legend('Materal ECG 1')
+ylabel('uV')
+yticks([-30 0 30])
+
+nexttile 
+plot(chunck_t_r01_3,chunk_r01_3_filtered,"LineWidth",1,"Color",'m')
+ylim([-55,55])
+set(gca,'xtick',[])
+ylabel('uV')
+legend('Materal ECG 2')
+yticks([-30 0 30])
+
+nexttile
+plot(chunck_t_r01_4,chunk_r01_4_filtered,"LineWidth",1,"Color",'g')
+ylim([-55,55])
+set(gca,'xtick',[])
+ylabel('uV')
+legend('Materal ECG 3')
+yticks([-30 0 30])
+
+
+nexttile 
+plot(chunck_t_r01_5,chunk_r01_5_filtered,"LineWidth",1,"Color",'r')
+ylim([-55,55]) 
+ylabel('uV')
+legend('Materal ECG 4')
+yticks([-30 0 30])
+%xticks([1,2,3,4,5])
+
+% yzeros = zeros(length(t_qrs_r01_1),1); 
+% scatter(t_qrs_r01_1,yzeros,"filled","ColorVariable","red");
 xlabel('time (s)'); 
-ylabel('ECG Amplitude')
-legend('Materal ECG 2','Materal ECG 3','Materal ECG 4','Fetal QRS Complex Annotation')
+ylabel('uV')
 
 
 %% Try lab ICA algorithm 
