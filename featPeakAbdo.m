@@ -22,13 +22,18 @@ if nargin < 2
     %time = index / fs
 end
 
+if contains(channel, 'ecg1')
+    magTh = 0.05;
+else
 magTh = 0.09;
+end
+magTh = 0.05;
 spcTh = 120;
 magThH = 0.2;
 spcThH = 400;
 pn = 1;
 fs = 1000;
-magThS = 0.2;
+magThS = 0.23;
 spcThS = 200;
 
 
@@ -37,7 +42,7 @@ spcThS = 200;
 
 normChunk = normal(chunk);
 
-% dNormChunk = detrend(normChunk);
+dNormChunk = detrend(normChunk);
 % 
 % figure()
 % subplot(3,1,1)
@@ -69,9 +74,9 @@ normChunk = normal(chunk);
 
 
 %% find peaks
-[Rpks,locs_Rwave] = findpeaks(normChunk,'MinPeakHeight',magTh,'MinPeakDistance',spcTh);
-[RpksM,locs_RwaveM] = findpeaks(normChunk,'MinPeakHeight',magThH,'MinPeakDistance',spcThH);
-invChunk = -normChunk;
+[Rpks,locs_Rwave] = findpeaks(dNormChunk,'MinPeakHeight',magTh,'MinPeakDistance',spcTh);
+[RpksM,locs_RwaveM] = findpeaks(dNormChunk,'MinPeakHeight',magThH,'MinPeakDistance',spcThH);
+invChunk = -dNormChunk;
 [Spks, locs_Swave] = findpeaks(invChunk,'MinPeakHeight',magThS,'MinPeakDistance',spcThS);
 
 %Swave = m peaks and Rwave-Swave = f peaks
@@ -94,26 +99,25 @@ locs_F = locs_Rwave(to_keep);
 
 
 % UNCOMMENT FIGURE TO SEE PEAKS
-% figure()
-% subplot(3,1,1)
-% plot(normChunk)
-% hold on
-% plot(locs_Rwave,normChunk(locs_Rwave),'rs','MarkerFaceColor','b');
-% subplot(3,1,2)
-% plot(normChunk);
-% hold on
-% plot(locs_Swave,normChunk(locs_Swave),'rv','MarkerFaceColor','r');
-% hold on
-% plot(locs_RwaveM,normChunk(locs_RwaveM),'bs','MarkerFaceColor','r');
-% 
-% subplot(3,1,3)
-% plot(normChunk);
-% hold on
-% plot(locs_F,normChunk(locs_F),'rv','MarkerFaceColor','g');
-% hold on
-% scatter(t_qrs_r01_5*fs,0.01*qrs_r01_5);
-% hold on
-% plot(locs_Swave,normChunk(locs_Swave),'rv','MarkerFaceColor','r');
+figure()
+subplot(3,1,1)
+plot(normChunk)
+hold on
+plot(locs_Rwave,dNormChunk(locs_Rwave),'rs','MarkerFaceColor','b');
+subplot(3,1,2)
+plot(normChunk);
+hold on
+plot(locs_Swave,dNormChunk(locs_Swave),'rv','MarkerFaceColor','r');
+hold on
+plot(locs_RwaveM,dNormChunk(locs_RwaveM),'bs','MarkerFaceColor','r');
+subplot(3,1,3)
+plot(normChunk);
+hold on
+plot(locs_F,dNormChunk(locs_F),'rv','MarkerFaceColor','g');
+hold on
+scatter(t_qrs_r01_5*fs,0.01*qrs_r01_5);
+hold on
+plot(locs_Swave,dNormChunk(locs_Swave),'rv','MarkerFaceColor','r');
 
 
 %take the location of peaks whichever has more peaks as maternal peaks from negative peaks or higher peaks 
