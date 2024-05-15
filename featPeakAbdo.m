@@ -22,13 +22,13 @@ if nargin < 2
     %time = index / fs
 end
 
-magTh = 0.09;
+magTh = 0.05;
 spcTh = 120;
 magThH = 0.2;
 spcThH = 400;
 pn = 1;
 fs = 1000;
-magThS = 0.2;
+magThS = 0.23;
 spcThS = 200;
 
 
