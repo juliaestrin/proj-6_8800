@@ -1,5 +1,4 @@
-load("trainedModel_baggedtree_2");
-
+load("trainedModel_baggedtree_2.mat")
 load("feature_vec_test_2s.mat");
 load("feature_vec_train_2s.mat");
 
@@ -49,15 +48,42 @@ ylabel("Predicted fetal BPM")
 title("Test Data results")
 
 %%
+figure(1)
+clf
 differences = testPredictions_scaled_rr_bpm-bpm_test';
 scatter(bpm_test',differences, 'filled')
 hold on;
 plot(bpm_test',8*ones(length(bpm_test'),1), 'color', 'r')
 hold on;
+plot(bpm_test',5*ones(length(bpm_test'),1), 'color', 'r', 'linestyle', ':')
+hold on;
 plot(bpm_test',-8*ones(length(bpm_test'),1), 'color', 'r')
+hold on;
+plot(bpm_test',-5*ones(length(bpm_test'),1), 'color', 'r', 'linestyle', ':')
 xlabel('True Fetal BPM')
 ylabel('Predicted BPM Difference')
 text(145,9,'Threshold=8','Color','red')
-text(145,-9,'Threshold=-8','Color','red')
+text(145,-9,'Threshold=-5','Color','red')
+text(145,6,'Threshold=8','Color','red')
+text(145,-6,'Threshold=-5','Color','red')
+title('Modified Bland-Altman Plot')
+%%
+true = bpm_test'
+threshold=8
+predicted = testPredictions_scaled_rr_bpm
+N = length(true);
+
+hits = zeros(N,1);
+
+for i = 1:length(true)
+    true_i = true(i);
+    predicted_i = predicted(i);
+    if (true_i == predicted_i) || ((true_i - threshold <= predicted_i) && (predicted_i <= (true_i + threshold)))
+         hits(i) = 1;
+    end
+end
+
+summed = sum(hits);
+acc = summed/N;
 %%
 save("trainedModel_baggedtree_2","trainedModel_baggedtree_2");
